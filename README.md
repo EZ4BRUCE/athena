@@ -4,6 +4,15 @@
 
 ## 安装&部署
 
+先拉取本仓库并进入athena目录
+
+```bash
+#拉取本仓库
+git clone git@github.com:EZ4BRUCE/athena.git
+#进入athena目录
+cd athena
+```
+
 
 
 ### 服务端
@@ -50,7 +59,7 @@ docker build -t athena-agent .
 #运行一个agent实例
 docker run --name user-agent1 --network athena_frontend athena-agent
 #测试用：可指定上报时间粒度
-docker run --name user-agent1 --network athena_frontend athena-agent cpuR=60 memR=60 diskR=60
+docker run --name user-agent1 --network athena_frontend athena-agent -cpuR=10 -memR=10 -diskR=10
 ```
 
 
