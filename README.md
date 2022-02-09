@@ -8,7 +8,7 @@
 
 ```bash
 #拉取本仓库
-git clone git@github.com:EZ4BRUCE/athena.git
+git clone https://github.com/EZ4BRUCE/athena.git
 #进入athena目录
 cd athena
 ```
@@ -22,13 +22,13 @@ cd athena
 拉取告警子系统：
 
 ```bash
-git clone git@github.com:EZ4BRUCE/athena-server.git
+git clone https://github.com/EZ4BRUCE/athena-server.git
 ```
 
 拉取规则配置子系统：
 
 ```bash
-git clone git@github.com:EZ4BRUCE/rule-server.git
+git clone https://github.com/EZ4BRUCE/rule-server.git
 ```
 
 拉取成功后，在当前目录下执行
@@ -46,7 +46,7 @@ docker-compose up --build
 拉取[Agent端](https://github.com/DeltaDemand/athena-agent)
 
 ```bash
-git clone git@github.com:DeltaDemand/athena-agent.git
+git clone https://github.com/DeltaDemand/athena-agent.git
 ```
 
 进入athena-agent目录，执行以下docker命令即可启动Agent端：
