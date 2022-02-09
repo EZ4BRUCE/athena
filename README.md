@@ -25,7 +25,7 @@ git clone git@github.com:EZ4BRUCE/rule-server.git
 拉取成功后，在当前目录下执行
 
 ```bash
-docker-compose up
+docker-compose up --build
 ```
 
 即可运行监控服务端
@@ -43,10 +43,14 @@ git clone git@github.com:DeltaDemand/athena-agent.git
 进入athena-agent目录，执行以下docker命令即可启动Agent端：
 
 ```bash
+#进入athena-agent目录
+cd athena-agent
 #构建docker镜像
 docker build -t athena-agent .
 #运行一个agent实例
 docker run --name user-agent1 --network athena_frontend athena-agent
+#测试用：可指定上报时间粒度
+docker run --name user-agent1 --network athena_frontend athena-agent cpuR=60 memR=60 diskR=60
 ```
 
 
