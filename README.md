@@ -64,3 +64,12 @@ docker run -d --name user-agent1 --network athena_frontend athena-agent -cpuR=10
 
 
 
+### 规则配置前端页面
+
+使用swagger实现接口文档以及测试，启动后访问以下链接即可：
+
+```
+localhost:1016/swagger/index.html
+```
+
+点击`try it out`即可测试
