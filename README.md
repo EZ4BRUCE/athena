@@ -59,7 +59,7 @@ docker build -t athena-agent .
 #运行一个agent实例
 docker run -d --name user-agent1 --network athena_frontend athena-agent
 #测试用：可指定上报时间粒度
-docker run -d --name user-agent1 --network athena_frontend athena-agent -checkAlive=30 -cpuR=10 -memR=10 -diskR=10
+docker run -d -i --name user-agent1 --network athena_frontend athena-agent -aggregationTime=5 -checkAlive=30 -cpuR=10 -memR=10 -diskR=10
 ```
 
 
