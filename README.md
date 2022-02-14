@@ -63,7 +63,10 @@ docker run -d --name user-agent1 --network athena_frontend athena-agent
 docker run -d -i --name user-agent1 --network athena_frontend athena-agent -aggregationTime=5 -checkAlive=30 -cpuR=10 -memR=10 -diskR=10 -cpu_memR=10
 
 #云服务器测试
+#阿里云
 docker run -d --name user-agent1 athena-agent -ip="112.74.60.132" -checkAlive=30 -cpuR=10 -memR=10 -diskR=10 -cpu_memR=10
+#腾讯云
+docker run -d --name user-agent1 athena-agent -ip="1.12.242.39" -checkAlive=30 -cpuR=10 -memR=10 -diskR=10 -cpu_memR=10
 ```
 
 
@@ -73,7 +76,13 @@ docker run -d --name user-agent1 athena-agent -ip="112.74.60.132" -checkAlive=30
 使用swagger实现接口文档以及测试，启动后访问以下链接即可：
 
 ```
+#本地
 localhost:1016/swagger/index.html
+
+
+
+#腾讯云
+http://1.12.242.39:1016/swagger/index.html
 ```
 
 点击`try it out`即可测试
