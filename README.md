@@ -41,7 +41,7 @@ docker-compose up --build
 
 
 
-### Agent
+### Agent部署
 
 拉取[Agent端](https://github.com/DeltaDemand/athena-agent)
 
@@ -58,8 +58,12 @@ cd athena-agent
 docker build -t athena-agent .
 #运行一个agent实例
 docker run -d --name user-agent1 --network athena_frontend athena-agent
-#测试用：可指定上报时间粒度
-docker run -d -i --name user-agent1 --network athena_frontend athena-agent -aggregationTime=5 -checkAlive=30 -cpuR=10 -memR=10 -diskR=10
+
+#本机测试：使用docker内网
+docker run -d -i --name user-agent1 --network athena_frontend athena-agent -aggregationTime=5 -checkAlive=30 -cpuR=10 -memR=10 -diskR=10 -cpu_memR=10
+
+#云服务器测试
+docker run -d --name user-agent1 athena-agent -ip="112.74.60.132" -checkAlive=30 -cpuR=10 -memR=10 -diskR=10 -cpu_memR=10
 ```
 
 
@@ -73,3 +77,7 @@ localhost:1016/swagger/index.html
 ```
 
 点击`try it out`即可测试
+
+
+
+edwe1414!
