@@ -79,14 +79,8 @@ docker run -d --name user-agent1 athena-agent -ip="1.12.242.39" -checkAlive=30 -
 #本地
 localhost:1016/swagger/index.html
 
-
-
 #腾讯云
 http://1.12.242.39:1016/swagger/index.html
 ```
 
 点击`try it out`即可测试
-
-
-
-edwe1414!
