@@ -31,13 +31,21 @@ git clone https://github.com/EZ4BRUCE/athena-server.git
 git clone https://github.com/EZ4BRUCE/rule-server.git
 ```
 
-拉取成功后，在当前目录下执行
+拉取成功后，在当前目录下执行，即可运行监控服务端
 
 ```bash
 docker-compose up --build
 ```
 
-即可运行监控服务端
+查看日志文件：
+
+```bash
+#进入athen-server容器终端
+docker exec -it athen-server /bin/sh
+cd storage/logs&&ls
+```
+
+
 
 
 
@@ -67,6 +75,12 @@ docker run -d -i --name user-agent1 --network athena_frontend athena-agent -aggr
 docker run -d --name user-agent1 athena-agent -ip="112.74.60.132" -checkAlive=30 -cpuR=10 -memR=10 -diskR=10 -cpu_memR=10
 #腾讯云
 docker run -d --name user-agent1 athena-agent -ip="1.12.242.39" -checkAlive=30 -cpuR=10 -memR=10 -diskR=10 -cpu_memR=10
+
+#告警测试：使用n个协程分别执行死循环t秒
+#进入agent终端
+docker exec -it user-agent1 /bin/sh
+#运行测试文件
+./test/testCpu -n=12 -t=10
 ```
 
 
