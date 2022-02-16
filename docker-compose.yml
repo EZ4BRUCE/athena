@@ -1,4 +1,4 @@
-version: "3"
+version: "3.9"
 
 
 networks:
@@ -9,21 +9,18 @@ networks:
 
 services:
   mysql:
-    # 指定mysql镜像版本
     image: mysql
-    # 自定义容器名
     container_name: athena-mysql
-    # 设置utf8字符集
-    command: --default-authentication-plugin=mysql_native_password #这行代码解决无法访问的问题    # 容器启动失败是否重启
+    command: --default-authentication-plugin=mysql_native_password
     restart: always
-    # 映射端口
     ports:
-      - "13306:3306"  # host物理直接映射端口为13306
+      - "13306:3306"  
     # 系统环境变量
     environment:
       MYSQL_DATABASE: 'rule-server' # 初始化启动时要创建的数据库的名称
       MYSQL_ROOT_PASSWORD: '123456' # root管理员用户密码
       MYSQL_PASSWORD: "123456"
+    # 健康检查
     healthcheck:
         test: ["CMD", 'mysqladmin', 'ping', '-h', 'localhost', '-u', 'root', '-p123456' ]
         timeout: 20s
@@ -31,26 +28,26 @@ services:
     # 映射数据卷到数据库
     volumes:
       - rule-data-mysql:/var/lib/mysql
-      - ./rule-server/sql:/docker-entrypoint-initdb.d/ # 数据库文件
+      - ./rule-server/sql:/docker-entrypoint-initdb.d/ # 数据库文件初始化
     networks:
       - backend
+
   rule-server:
     build:
       context: ./rule-server
-      # 指定dockerfile启动容器
       dockerfile: ./Dockerfile
-    # 自定义容器名
     container_name: rule-server
-    # # 容器启动失败是否重启
     restart: always
     ports:
       - "1016:1016"
+    # 确保mysql准备就绪
     depends_on:
-      - mysql
-    command: sh -c 'wait-for mysql:3306 -- bundle exec rails s'
+      mysql:
+        condition: service_healthy
     networks:
       - frontend
       - backend
+
   mongodb:
     image: mongo
     container_name: athena-mongodb
@@ -69,6 +66,7 @@ services:
       - report-data-mongo:/data
     networks:
       - backend
+
   athena-server:
     build:
       context: ./athena-server
@@ -77,30 +75,18 @@ services:
     restart: always
     ports:
       - "8888:8888"
+    # 确保mysql准备就绪
     depends_on:
-      - rule-server
-      - mongodb
-    command: sh -c 'wait-for mongodb:27017 -- bundle exec rails s' && sh -c 'wait-for mysql:3306 -- bundle exec rails s'
+      mysql:
+        condition: service_healthy
+      rule-server: 
+        condition: service_started
+      mongodb:
+        condition: service_started
     networks:
       - frontend
       - backend
-  # alpine:
-  #   build:
-  #     context: ./alpine
-  #     # 指定dockerfile启动容器
-  #     dockerfile: ./Dockerfile
-  #   # 自定义容器名
-  #   container_name: alpinelinux
-  #   # # 容器启动失败是否重启
-  #   # restart: always
-  #   ports:
-  #     - "1016:1016"
-  #   # depends_on:
-  #   #   - mysql
-  #   tty: true
-  #   networks:
-  #     - backend
-        
+    
 volumes:
   rule-data-mysql:
   report-data-mongo:
