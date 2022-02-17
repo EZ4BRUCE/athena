@@ -55,6 +55,8 @@ chmod +x ./test.sh
 ./test.sh 1 10 local
 
 ./test.sh 1 10 "112.74.60.132"
+
+./test.sh 1 10 "1.12.242.39"
 ```
 
 
