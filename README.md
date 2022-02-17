@@ -52,7 +52,9 @@ cd storage/logs&&ls
 #赋予权限
 chmod +x ./test.sh
 #运行预设的测试脚本 第一个参数为group别，第二个参数为开启个数
-./test.sh 1 10
+./test.sh 1 10 local
+
+./test.sh 1 10 "112.74.60.132"
 ```
 
 
