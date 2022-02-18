@@ -3,6 +3,7 @@ num=$1
 i=1
 while [ $i -le $num ]
 do
+    docker stop host$i
     docker rm -v host$i
     let i++
 done
