@@ -72,18 +72,15 @@ http://112.74.60.132:1016/swagger/index.html
 
 ### Agent部署
 
-在需要被监控的主机上拉取[Agent端](https://github.com/DeltaDemand/athena-agent)
+拉取并构建镜像[Agent端](https://github.com/DeltaDemand/athena-agent)
 
 ```bash
-git clone https://github.com/DeltaDemand/athena-agent.git
+docker build -t athena-agent https://github.com/DeltaDemand/athena-agent.git#main
 ```
 
 进入athena-agent目录，执行以下docker命令即可启动Agent端：
 
 ```bash
-#构建docker镜像
-docker build -t athena-agent ./athena-agent
-
 #本机测试：使用docker内网
 docker run -d -i --name host01 --network athena_frontend athena-agent -aggregationTime=5 -checkAlive=30 -cpuR=10 -memR=10 -diskR=10 -cpu_memR=10 -group=group01 -name=agent01
 
@@ -106,7 +103,7 @@ docker run -d --name host01 athena-agent -ip="1.12.242.39" -checkAlive=30 -cpuR=
 #进入agent终端
 docker exec -it host01 /bin/sh
 #运行程序，使cpu、内存等数据有所波动
-./test/poseidon -goN=12 -append=10000000 -sleep=100000
+./test/poseidon -goN=12 -times=10 -append=10000000 -sleep=100000
 # -append int                                 
 #        每个goroutine内append字符串的次数     
 #  -goN int                                    
