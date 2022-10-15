@@ -72,10 +72,10 @@ http://112.74.60.132:1016/swagger/index.html
 
 ### Agent部署
 
-拉取并构建镜像[Agent端](https://github.com/DeltaDemand/athena-agent)
+拉取并构建镜像[Agent端](https://github.com/EZ4BRUCE/athena-agent)
 
 ```bash
-docker build -t athena-agent https://github.com/DeltaDemand/athena-agent.git#main
+docker build -t athena-agent https://github.com/EZ4BRUCE/athena-agent.git#main
 ```
 
 进入athena-agent目录，执行以下docker命令即可启动Agent端：
