@@ -74,7 +74,7 @@ services:
     container_name: athena-server
     restart: always
     ports:
-      - "8888:8888"
+      - "8880:8880"
     # 确保mysql准备就绪
     depends_on:
       mysql:
