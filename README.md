@@ -60,12 +60,6 @@ cd storage/logs&&ls
 #本机测试
 http://localhost:1016/swagger/index.html
 
-#腾讯云
-http://1.12.242.39:1016/swagger/index.html
-
-#阿里云
-http://112.74.60.132:1016/swagger/index.html
-
 点击`try it out`，滑动到对应的测试输入框，输入后按下`execute`即可测试（注意，字符串要加 “”）
 
 
@@ -86,10 +80,8 @@ docker run -d -i --name host-test --network athena_frontend athena-agent -aggreg
 
 #云服务器测试
 #agent运行连接云服务器
-#阿里云
-docker run -d --name host-test athena-agent -ip="112.74.60.132" -aggregationTime=5 -checkAlive=30 -cpuR=10 -memR=10 -diskR=10 -cpu_memR=10 -group=group01 -name=agent01
 #腾讯云
-docker run -d --name host-test athena-agent -ip="1.12.242.39" -aggregationTime=5 -checkAlive=30 -cpuR=10 -memR=10 -diskR=10 -cpu_memR=10 -group=group01 -name=agent01
+docker run -d --name host-test athena-agent -ip="x.x.x.x" -aggregationTime=5 -checkAlive=30 -cpuR=10 -memR=10 -diskR=10 -cpu_memR=10 -group=group01 -name=agent01
 # athena-agent 部分参数解释:
 # -aggregationTime int                                                      
 #        上报几次进行聚合，默认0(由server端决定)
@@ -142,28 +134,4 @@ goN=12情况下改变append值能让内存占用大致如下，可根据机器�
 
 
 
-### 服务端压力测试
-
-同时启动多个agent测试**gRPC服务、Agent注册、Report接收、邮件收发**功能是否正常
-
-在athena目录下（需要本机build好Agent镜像）：
-
-```bash
-#运行预设的测试脚本
-
-#赋予权限
-chmod +x ./test.sh
-#运行预设的测试脚本：第一个参数为组别group，第二个参数为开启个数num，第三个参数为Agent要连接的服务器
-./test.sh 1 10 local
-#腾讯云
-./test.sh 1 10 "1.12.242.39"
-#阿里云
-./test.sh 1 10 "112.74.60.132"
-
-#删除刚才创建的容器
-#赋予权限
-chmod +x ./delete.sh
-#第一个参数为刚才创建的容器个数num
-./delete.sh 10
-```
 
