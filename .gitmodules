@@ -1,0 +1,9 @@
+[submodule "athena-server"]
+	path = athena-server
+	url = https://github.com/EZ4BRUCE/athena-server.git
+[submodule "rule-server"]
+	path = rule-server
+	url = https://github.com/EZ4BRUCE/rule-server.git
+[submodule "athena-agent"]
+	path = athena-agent
+	url = git@github.com:EZ4BRUCE/athena-agent.git
